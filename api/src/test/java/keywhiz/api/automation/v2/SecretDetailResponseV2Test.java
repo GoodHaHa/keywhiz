@@ -69,12 +69,11 @@ public class SecretDetailResponseV2Test {
   }
 
   @Test public void formsCorrectlyFromSanitizedSecret() throws Exception {
-    Secret secret = new Secret(1, "secret-name", "secret-description", () -> "YXNkZGFz", "checksum",
+    SanitizedSecret sanitizedSecret = SanitizedSecret.of(1, "secret-name",  "checksum", "secret-description",
         ApiDate.parse("2013-03-28T21:23:04.159Z"), "creator-user",
         ApiDate.parse("2014-03-28T21:23:04.159Z"), "updater-user",
         ImmutableMap.of("owner", "root"), "text/plain", null,
         1136214245, 1L);
-    SanitizedSecret sanitizedSecret = SanitizedSecret.fromSecret(secret);
     SecretDetailResponseV2 secretDetailResponse = SecretDetailResponseV2.builder()
         .sanitizedSecret(sanitizedSecret)
         .build();
